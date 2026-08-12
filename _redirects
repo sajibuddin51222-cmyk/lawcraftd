@@ -1,0 +1,4 @@
+# Netlify Redirects & Clean URL Routing
+/article /blog-details.html 200
+/article/:slug /blog-details.html?article=:slug 200
+/legal-insights/:slug /blog-details.html?article=:slug 200

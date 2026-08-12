@@ -1,0 +1,53 @@
+# ==============================================================================
+# Advocate Rashedul Anowar Rasel - Enterprise Apache / LiteSpeed Configuration
+# URL Rewriting (Clean URLs without .html extensions) & Security Hardening
+# ==============================================================================
+
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Redirect /index.html directly to root / (Prevent duplicate content & exposure)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.html\ HTTP/
+  RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
+  # 2. Redirect /filename.html to /filename (Clean URL masking)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.]+)\.html\ HTTP/
+  RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
+
+  # 3. Clean Article Routing
+  RewriteRule ^article/([a-zA-Z0-9_-]+)$ /blog-details.html?article=$1 [L,QSA]
+  RewriteRule ^article$ /blog-details.html [L,QSA]
+
+  # 4. Resolve clean paths internally to .html files if file exists
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^([^\.]+)$ $1.html [NC,L]
+</IfModule>
+
+# ==============================================================================
+# Security Headers & Hardening
+# ==============================================================================
+<IfModule mod_headers.c>
+  # Protect against clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+
+  # Protect against MIME type sniffing
+  Header set X-Content-Type-Options "nosniff"
+
+  # Cross-Site Scripting (XSS) Protection
+  Header set X-XSS-Protection "1; mode=block"
+
+  # Referrer Policy
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions Policy
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes
+
+# UTF-8 Default Encoding
+AddDefaultCharset UTF-8
