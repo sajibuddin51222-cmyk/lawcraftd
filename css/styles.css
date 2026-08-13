@@ -2358,6 +2358,25 @@ input:checked+.slider:before {
   font-size: 0.85rem;
 }
 
+.developer-credit {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.developer-credit a {
+  color: var(--gold-light, #cca472);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.developer-credit a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 .footer-social-links {
   display: flex;
   align-items: center;
