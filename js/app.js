@@ -168,7 +168,7 @@ const careerMilestones = [
       "Over 40+ reported and recognized High Court writ order precedents",
       "Stay orders obtained against unauthorized regulatory notices"
     ],
-    image: "assets/images/practice-criminal.webp"
+    image: "assets/images/image/24.png"
   },
   {
     year: "2024",
@@ -179,7 +179,7 @@ const careerMilestones = [
       "Retained by 50+ corporate firms for ongoing statutory advisory & RJSC filings",
       "Mediated high-stake commercial dispute settlements out of court"
     ],
-    image: "assets/images/practice-corporate.webp"
+    image: "assets/images/image/23.png"
   },
   {
     year: "2026",
